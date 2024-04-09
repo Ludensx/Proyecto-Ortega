@@ -16,19 +16,39 @@ const db = mysql.createConnection({
 app.listen(3001,()=>{
     console.log('Corriendo en el puerto 3001');
 })
-
 app.post("/createEst",(req,res)=>{
     const identificacion = req.body.identificacion;
     const nombre = req.body.nombre;
     const apellido = req.body.apellido;
-
     db.query('INSERT INTO dbOrtega.estudiante (est_id, est_nombre, est_apellido) VALUES(?,?,?)',
     [identificacion,nombre,apellido],
     (err,result)=>{
         if(err) console.log(err);
         else {
-            res.send("Estudiante registrado");
+            res.send("Estudiante Registrado");
         }
     });
 
+});
+app.get("/estudiantes",(req,res)=>{
+    db.query('SELECT * from dbOrtega.estudiante',
+    (err,result)=>{
+        if(err) console.log(err);
+        else {
+            res.send(result);
+        }
+    });
+});
+app.put("/updateEst",(req,res)=>{
+    const identificacion = req.body.identificacion;
+    const nombre = req.body.nombre;
+    const apellido = req.body.apellido;
+    db.query('UPDATE dbOrtega.estudiante SET est_nombre=?, est_apellido=? WHERE (est_id=?)',
+    [nombre,apellido,identificacion],
+    (err,result)=>{
+        if(err) console.log(err);
+        else {
+            res.send("Estudiante Actualizado");
+        }
+    });
 });
