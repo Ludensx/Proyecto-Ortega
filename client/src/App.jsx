@@ -1,11 +1,11 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ListEstudiantes from './componentes/ListEstudiantes.jsx';
+import FormRegistroEstudiante from './componentes/FormRegistroEstudiante.jsx';
 
 function App() {   
   return (
     <div>
-      <ListEstudiantes/>
+      <FormRegistroEstudiante/>
     </div>
   );
 }

@@ -20,7 +20,7 @@ app.post("/createEst",(req,res)=>{
     const identificacion = req.body.identificacion;
     const nombre = req.body.nombre;
     const apellido = req.body.apellido;
-    db.query('INSERT INTO dbOrtega.estudiante (est_id, est_nombre, est_apellido) VALUES(?,?,?)',
+    db.query('INSERT INTO dbOrtega.estudiante (est_id, est_nombre, est_apellido, est_estado) VALUES(?,?,?,"Activo")',
     [identificacion,nombre,apellido],
     (err,result)=>{
         if(err) console.log(err);
@@ -43,12 +43,23 @@ app.put("/updateEst",(req,res)=>{
     const identificacion = req.body.identificacion;
     const nombre = req.body.nombre;
     const apellido = req.body.apellido;
-    db.query('UPDATE dbOrtega.estudiante SET est_nombre=?, est_apellido=? WHERE (est_id=?)',
-    [nombre,apellido,identificacion],
+    const estado = req.body.estado;
+    db.query('UPDATE dbOrtega.estudiante SET est_nombre=?, est_apellido=?, est_estado=? WHERE (est_id=?)',
+    [nombre,apellido,estado,identificacion],
     (err,result)=>{
         if(err) console.log(err);
         else {
             res.send("Estudiante Actualizado");
         }
     });
+});
+app.delete("/deleteEst/:id",(req,res)=>{
+    const identificacion = req.params.id;
+    db.query('DELETE from dbOrtega.estudiante  WHERE (est_id=?)',identificacion,
+    (err,result)=>{
+        if(err) console.log(err);
+        else {
+            res.send("Estudiante Eliminado");
+        }
+    })
 });
