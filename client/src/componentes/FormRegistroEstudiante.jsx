@@ -64,7 +64,7 @@ function FormRegistroEstudiante(props){
     <div className="container">
       <div className="card text-center">
         <div className="card-header">
-          Gestión de Estudiantes
+          Gestión Estudiantes
         </div>
         <div className="card-body">
           <div className="input-group mb-3">
